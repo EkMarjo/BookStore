@@ -1,7 +1,5 @@
 package projekti.bookstore.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +37,7 @@ public class BookController {
     @RequestMapping(value= "/save", method=RequestMethod.POST)
     public String save(Book book) {
         repository.save(book);
-        return "redirect:booklist";
+        return "redirect:/booklist";
     }
     
     @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
