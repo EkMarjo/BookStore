@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import projekti.bookstore.model.Book;
 import projekti.bookstore.model.BookRepository;
+import projekti.bookstore.model.CategoryRepository;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
@@ -20,6 +22,9 @@ public class BookController {
     @Autowired
     private BookRepository repository;
 
+    @Autowired
+    private CategoryRepository crepository;
+
     @RequestMapping(value= {"/", "/booklist"})
     public String bookList(Model model) {
         model.addAttribute("books", repository.findAll());
@@ -28,6 +33,7 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categorys", crepository.findAll());
         return "addbook";
     }
     @RequestMapping(value= "/save", method=RequestMethod.POST)
@@ -44,6 +50,7 @@ public class BookController {
     @RequestMapping(value="/editBook/{id}", method=RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editBook", repository.findById(id));
+        model.addAttribute("categorys", crepository.findAll());
         return "editBook";
     }
     
