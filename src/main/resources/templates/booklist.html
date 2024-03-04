@@ -25,5 +25,10 @@
         </tr>
      </table> 
      <a href="/add">Add Book</a>   	
+     <div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
 </body>
 </html>

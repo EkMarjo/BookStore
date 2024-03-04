@@ -7,7 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
+import projekti.bookstore.model.AppUser;
+import projekti.bookstore.model.AppUserRepository;
 import projekti.bookstore.model.Book;
 import projekti.bookstore.model.BookRepository;
 import projekti.bookstore.model.Category;
@@ -22,7 +23,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository){
+	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository, AppUserRepository arepository){
 		return (args) -> {
 			log.info("tallenna kirjoja");
 
@@ -38,6 +39,11 @@ public class BookstoreApplication {
 
 			repository.save(new Book("Kirja1", "Kirjailija1", "isbn1", 2020, 19.95, c1));
 			repository.save(new Book("Kirja2", "Kirjailija2", "isbn2", 2012, 10.15, c2));
+
+			AppUser user1= new AppUser("user", "$2a$10$ZrX1QAPaztLhc2VeKzxKge2OCmN0beeNfXFBlqdjXSWs3awF7IJYm", "USER");
+			AppUser user2= new AppUser("admin", "$2a$10$UcFsuoZtEFkqUaHhl0uL8O5pUFF/XG2mghfeDkUkEKyCaMLLjOHyu", "ADMIN");
+			arepository.save(user1);
+			arepository.save(user2);
 
 
 			log.info("Näytä kaikki kirjat");
