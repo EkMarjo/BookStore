@@ -1,6 +1,7 @@
 package projekti.bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,8 @@ import projekti.bookstore.model.BookRepository;
 import projekti.bookstore.model.CategoryRepository;
 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -40,19 +43,19 @@ public class BookController {
         return "redirect:/booklist";
     }
     
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long id, Model model) {
         repository.deleteById(id);
         return "redirect:../booklist";
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/editBook/{id}", method=RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editBook", repository.findById(id));
         model.addAttribute("categorys", crepository.findAll());
         return "editBook";
     }
-    
-    
     
     
 
