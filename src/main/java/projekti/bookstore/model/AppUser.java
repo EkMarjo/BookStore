@@ -1,6 +1,8 @@
 package projekti.bookstore.model;
 
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="UserTable")
-public class AppUser {
+public class AppUser  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
